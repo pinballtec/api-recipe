@@ -12,7 +12,6 @@ WORKDIR /app
 EXPOSE 8000
 
 ARG DEV=false
-
 RUN pip install -r requirements.txt && \
      if [ $DEV = "true" ]; \
         then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
@@ -25,9 +24,6 @@ RUN pip install -r requirements.txt && \
 
 COPY . /app/
 
-RUN adduser -D django-user
-RUN chown django-user:django-user -R /app/
-RUN chmod +x /app/
 USER django-user
 
 ENV PATH="/py/bin:$PATH"
