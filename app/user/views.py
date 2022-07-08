@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .serializer import UserSerializer
+from .serializers import UserSerializer
 # Create your views here.
 
 
