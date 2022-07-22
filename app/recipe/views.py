@@ -10,7 +10,7 @@ from core.models import Recipe
 from . import serializers
 
 
-class RecepieViewSet(viewsets.ModelViewSet):
+class RecipeViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.RecipeSerializer
     queryset = Recipe.objects.all()
     authentication_classes = [TokenAuthentication]

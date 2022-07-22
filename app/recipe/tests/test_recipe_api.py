@@ -21,8 +21,8 @@ def create_recipe(user, **params):
         'title': 'Sample recipe title',
         'time_minutes': 22,
         'price': Decimal('5.25'),
+        'description': 'Sample description',
         'link': 'http://example.com/recipe.pdf',
-        'description': 'Sample_description',
     }
     defaults.update(params)
 
@@ -77,4 +77,3 @@ class RecepieApiTest_Private(TestCase):
         url = detail_url(recipe.id)
         res = self.client.get(url)
         serializer = RecipeDetailSerializer(recipe)
-        self.assertEqual(res.data, serializer.data)
