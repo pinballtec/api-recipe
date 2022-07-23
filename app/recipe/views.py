@@ -2,11 +2,11 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from core.models import Recipe
+from core.models import Recipe, Tag
 from . import serializers
 
 
@@ -28,3 +28,14 @@ class RecipeViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         """creating new recipe"""
         serializer.save(user=self.request.user)
+
+
+class TagsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    serializer_class = serializers.TagSerializer
+    queryset = Tag.objects.all()
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        """filter queryset to auth_user"""
+        return self.queryset.filter(user=self.request.user).order_by('-name')
