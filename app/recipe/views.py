@@ -30,7 +30,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
 
-class TagsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class TagsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
     serializer_class = serializers.TagSerializer
     queryset = Tag.objects.all()
     authentication_classes = [TokenAuthentication]
